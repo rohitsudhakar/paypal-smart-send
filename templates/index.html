@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Money | AI FX Optimizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="paypal-container">
+        <div class="transfer-card">
+
+            <div class="amount-section">
+                <label for="amount">You send</label>
+                <div class="amount-input-wrapper">
+                    <input type="number" id="amount" value="100.00" step="0.01" placeholder="0.00">
+                    <select id="from-currency" class="currency-selector">
+                        {% for ccy in currencies %}
+                        <option value="{{ ccy }}" {% if ccy == 'USD' %}selected{% endif %}>{{ ccy }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="amount-section recipient-section">
+                <label for="to-currency">Recipient gets (approx.)</label>
+                <div class="amount-display-wrapper">
+                    <span id="recipient-amount-display" class="recipient-amount">--.--</span>
+                    <select id="to-currency" class="currency-selector">
+                         {% for ccy in currencies %}
+                         <option value="{{ ccy }}" {% if ccy == 'INR' %}selected{% endif %}>{{ ccy }}</option>
+                         {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="rate-display">
+                Conversion rate:
+                <span id="current-rate-value">1 USD = --.-- INR</span>
+                {# Info icon button to trigger AI advice #}
+                <button id="ai-info-button" class="ai-info-button" aria-label="Show AI Advice" disabled>
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                {# Loading indicator, shown during fetch #}
+                <span id="loading-indicator" class="loading-indicator" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </div>
+
+             <div id="recommendation-box" class="recommendation-box" style="display: none;">
+                <h2><i id="rec-icon" class="fas"></i> AI Recommendation</h2>
+                {# Area to display potential savings #}
+                <p id="savings-info" class="savings-info" style="display: none;"></p>
+                <p id="recommendation-message">Loading advice...</p>
+                <div id="recommendation-details" class="recommendation-details" style="display: none;">
+                     <p id="rec-detail-trend"></p>
+                     <p id="rec-detail-fund"></p>
+                     <p id="rec-detail-news"></p>
+                </div>
+            </div>
+
+            <div class="note-section">
+                 <label for="note">Add a note (optional)</label>
+                 <input type="text" id="note" placeholder="What's this for?">
+            </div>
+
+            <div class="action-buttons">
+                <button id="next-button" class="button-primary">Next</button>
+                <button id="cancel-button" class="button-link">Cancel</button>
+            </div>
+
+        </div>
+        <p class="footer-note">Money transfer is simulated. AI insights are based on mock data and are for demonstration purposes only. FX predictions are not guaranteed.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

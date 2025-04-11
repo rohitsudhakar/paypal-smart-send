@@ -1,0 +1,143 @@
+/* static/css/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --paypal-blue: #0070ba;
+    --paypal-blue-dark: #005ea6;
+    --paypal-navy: #142c66;
+    --paypal-border: #dfe1e5;
+    --paypal-background: #f7f8f9;
+    --text-primary: #2c2e2f;
+    --text-secondary: #6c7378;
+    --success-green: #1a8d5f; /* Keep for savings */
+    --success-green-light: #e8f5e9;
+    --warning-orange: #ff9800;
+    --warning-orange-light: #fff3e0;
+    --danger-red: #d9534f; /* Keep for savings (loss avoided) */
+    --danger-red-light: #fdecea;
+    --neutral-blue: #64b5f6;
+    --neutral-blue-light: #e3f2fd;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--paypal-background);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.paypal-container {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+}
+
+.transfer-card {
+    background-color: #ffffff;
+    padding: 30px 35px 40px 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--paypal-border);
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Amount Sections */
+.amount-section { margin-bottom: 25px; border: 1px solid var(--paypal-border); border-radius: 8px; padding: 15px 20px; position: relative; }
+.amount-section label { display: block; font-size: 0.85em; color: var(--text-secondary); font-weight: 500; margin-bottom: 8px; }
+.amount-input-wrapper, .amount-display-wrapper { display: flex; justify-content: space-between; align-items: center; }
+#amount { font-size: 2.2em; font-weight: 600; color: var(--text-primary); border: none; outline: none; padding: 0; width: 70%; background: none; -moz-appearance: textfield; }
+#amount::-webkit-outer-spin-button, #amount::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.recipient-amount { font-size: 2.2em; font-weight: 600; color: var(--text-primary); padding: 0; line-height: 1; min-height: 1.2em; }
+.currency-selector { font-size: 1.1em; font-weight: 500; color: var(--text-primary); border: none; background: none; padding: 5px 8px; border-radius: 6px; cursor: pointer; outline: none; appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%236c7378" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>'); background-repeat: no-repeat; background-position: right 8px center; background-size: 12px 12px; padding-right: 25px; border: 1px solid transparent; transition: border-color 0.2s ease; }
+.currency-selector:focus { border-color: var(--paypal-blue); }
+
+/* Rate Display Area */
+.rate-display { font-size: 0.9em; color: var(--text-secondary); text-align: center; margin: 10px 0 25px 0; display: flex; justify-content: center; align-items: center; min-height: 24px; }
+#current-rate-value { font-weight: 500; color: var(--text-primary); margin-right: 8px; }
+.ai-info-button { background: none; border: none; padding: 0 5px; margin: 0; color: var(--paypal-blue); cursor: pointer; font-size: 1.1em; line-height: 1; transition: color 0.2s ease; display: inline-flex; align-items: center; }
+.ai-info-button:hover:not(:disabled) { color: var(--paypal-blue-dark); }
+.ai-info-button:disabled { color: var(--text-secondary); cursor: not-allowed; opacity: 0.6; }
+.ai-info-button i { display: block; }
+.loading-indicator { margin-left: 8px; color: var(--paypal-blue); font-size: 0.9em; }
+.fa-spinner { animation: fa-spin 1s infinite linear; }
+@keyframes fa-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* AI Recommendation Box Styling */
+.recommendation-box { margin-top: 15px; margin-bottom: 25px; padding: 15px 20px; border-radius: 8px; border: 1px solid var(--paypal-border); background-color: var(--paypal-background); text-align: left; transition: background-color 0.3s ease, border-color 0.3s ease; }
+.recommendation-box h2 { margin: 0 0 10px 0; font-size: 1.0em; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; }
+.recommendation-box h2 i { margin-right: 8px; font-size: 1.0em; }
+
+/* Styling for Savings Info */
+.savings-info {
+    font-size: 0.95em; /* Slightly larger than main message */
+    font-weight: 600; /* Make it stand out */
+    color: var(--success-green); /* Default to green for savings */
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: var(--success-green-light); /* Light green background */
+    border: 1px solid var(--success-green);
+}
+/* Style for potential loss avoided (send now) */
+.recommendation-box.send_now .savings-info {
+    color: var(--danger-red);
+    background-color: var(--danger-red-light);
+    border-color: var(--danger-red);
+}
+
+/* Smaller font for main recommendation message */
+#recommendation-message { font-size: 0.90em; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.45; }
+/* Details remain smaller */
+.recommendation-details { font-size: 0.80em; color: var(--text-secondary); border-top: 1px solid #e0e0e0; padding-top: 10px; margin-top: 10px; opacity: 0.9; }
+.recommendation-details p { margin: 3px 0; line-height: 1.4; }
+.recommendation-details p:empty { display: none; }
+
+/* Recommendation color styles */
+.recommendation-box.wait { /* Keep background style */ background-color: var(--warning-orange-light); border-color: var(--warning-orange); }
+.recommendation-box.wait h2 i { color: var(--warning-orange); }
+.recommendation-box.send_now { /* Keep background style */ background-color: var(--danger-red-light); border-color: var(--danger-red); }
+.recommendation-box.send_now h2 i { color: var(--danger-red); }
+/* Stable and Uncertain use default background now */
+/* .recommendation-box.stable { background-color: var(--success-green-light); border-color: var(--success-green); } */
+/* .recommendation-box.stable h2 i { color: var(--success-green); } */
+/* .recommendation-box.uncertain { background-color: var(--neutral-blue-light); border-color: var(--neutral-blue); } */
+/* .recommendation-box.uncertain h2 i { color: var(--neutral-blue); } */
+
+
+/* Note Section */
+.note-section { margin-bottom: 30px; }
+.note-section label { display: block; font-size: 0.9em; color: var(--text-secondary); margin-bottom: 8px; }
+#note { width: 100%; padding: 12px 15px; border: 1px solid var(--paypal-border); border-radius: 8px; font-size: 1em; box-sizing: border-box; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+#note:focus { border-color: var(--paypal-blue); box-shadow: 0 0 0 3px rgba(0, 112, 186, 0.1); }
+
+/* Action Buttons */
+.action-buttons { text-align: center; }
+.button-primary, .button-secondary, .button-link { display: inline-block; padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; font-size: 1.05em; font-weight: 600; transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease; margin: 5px 0; width: 100%; box-sizing: border-box; }
+.button-primary:disabled { background-color: #a0cdec; cursor: not-allowed; box-shadow: none; }
+.button-primary { background-color: var(--paypal-navy); color: white; }
+.button-primary:hover:not(:disabled) { background-color: #0e1e44; }
+.button-primary:active:not(:disabled) { transform: scale(0.98); }
+.button-link { background: none; color: var(--paypal-blue); font-weight: 600; padding: 10px 20px; margin-top: 10px; display: block; width: auto; margin-left: auto; margin-right: auto; }
+.button-link:hover { text-decoration: underline; }
+
+/* Footer Note */
+.footer-note { font-size: 0.85em; color: var(--text-secondary); margin-top: 20px; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    body { padding: 20px 15px; align-items: flex-start; }
+    .paypal-container { max-width: 100%; }
+    .transfer-card { padding: 25px 20px; }
+    #amount, .recipient-amount { font-size: 1.8em; }
+    .currency-selector { font-size: 1em; }
+    .button-primary, .button-link { width: 100%; margin: 8px 0; }
+    .rate-display { flex-wrap: wrap; }
+    .savings-info { font-size: 0.9em; } /* Adjust savings font on mobile */
+}
